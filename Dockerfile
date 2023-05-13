@@ -1,5 +1,5 @@
 FROM debian
-LABEL maintainer="loblab"
+LABEL maintainer="bala"
 
 #ARG TZ=Asia/Shanghai
 #ARG APT_MIRROR=mirrors.163.com
@@ -11,15 +11,16 @@ ARG PYTHON=python3
 RUN apt-get update && apt-get -y upgrade
 RUN apt-get -y install chromium-chromedriver || \
     apt-get -y install chromium-driver || \
-    apt-get -y install chromedriver
+    apt-get -y install chromedriver cron
 RUN apt-get -y install ${PYTHON}-pip
 RUN $PYTHON -m pip install selenium
 RUN apt-get -y install curl wget
 
-RUN mkdir -p /home/loblab && \
-    useradd -d /home/loblab -u 1001 loblab && \
-    chown loblab:loblab /home/loblab
-USER loblab
-WORKDIR /home/loblab
-COPY /noip-renew.py /home/loblab/
-ENTRYPOINT ["python3", "/home/loblab/noip-renew.py"]
+RUN mkdir -p /home/bala && \
+    useradd -d /home/bala -u 1001 bala && \
+    chown bala:bala /home/bala
+USER bala
+WORKDIR /home/bala
+COPY /noip-renew.py /home/bala/
+RUN (crontab -l | grep . ; echo -e "12  3  *  *  1,3,5 python3 /home/bala/noip-renew.py seltecqa01 Seltec2020 3 2") | crontab - || true
+ENTRYPOINT ["python3", "/home/bala/noip-renew.py"]
