@@ -1,8 +1,10 @@
 version: '3.1'
 services:
   noip-renew:
-    image: loblab/selenium:debian
+    image: bala-noip
     hostname: noip-renew
     container_name: noip-renew
     restart: always
-    command: "seltecqa01" "Seltec2020" "3" 2 && tail -f /dev/null
+    volumes:
+      - ./homefolder:/home/bala
+    command: tail -f /dev/null

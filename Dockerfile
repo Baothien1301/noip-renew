@@ -22,5 +22,6 @@ RUN mkdir -p /home/bala && \
 USER bala
 WORKDIR /home/bala
 COPY /noip-renew.py /home/bala/
-RUN (crontab -l | grep . ; echo -e "12  3  *  *  1,3,5 python3 /home/bala/noip-renew.py seltecqa01 Seltec2020 3 2") | crontab - || true
-ENTRYPOINT ["python3", "/home/bala/noip-renew.py"]
+VOLUME ["/home/bala"]
+RUN (crontab -l | grep . ; echo -e "12  3  *  *  1,3,5 python3 /home/bala/noip-renew.py \"seltecqa01\" \"Seltec2020\" \"3\"") | crontab - || true
+# ENTRYPOINT ["python3", "/home/bala/noip-renew.py"]

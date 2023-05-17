@@ -105,7 +105,7 @@ class Robot:
         today = date.today() + timedelta(days=nr)
         day = str(today.day)
         month = str(today.month)
-        subprocess.call(['/usr/local/bin/noip-renew-skd.sh', day, month, "True"])
+        #subprocess.call(['/usr/local/bin/noip-renew-skd.sh', day, month, "True"])
         return True
 
     def open_hosts_page(self):
@@ -131,11 +131,14 @@ class Robot:
             raise Exception("Manual intervention required. Upgrade text detected.")
 
         self.browser.save_screenshot(f"{host_name}_success.png")
-
+        btn_updatehost = host.find_element("xpath","//button[@class='btn btn-170 btn-flat btn-success btn-round-corners pr-sm ml-sm-30']")
+        btn_updatehost.click()
+        time.sleep(3)
+        self.browser.save_screenshot(f"{host_name}_success_b.png")
     @staticmethod
     def get_host_expiration_days(host, iteration):
         try:
-            host_remaining_days = host.find_element_by_xpath(".//a[@class='no-link-style']").text
+            host_remaining_days = host.find_element("xpath",".//a[@class='no-link-style']").text
         except:
             host_remaining_days = "Expires in 0 days"
             pass
