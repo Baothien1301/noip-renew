@@ -15,7 +15,7 @@ RUN apt-get -y install chromium-chromedriver || \
 RUN apt-get -y install ${PYTHON}-pip
 RUN $PYTHON -m pip install selenium
 RUN apt-get -y install curl wget
-
+RUN service cron start
 RUN mkdir -p /home/bala && \
     useradd -d /home/bala -u 1001 bala && \
     chown bala:bala /home/bala
