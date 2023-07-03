@@ -120,19 +120,19 @@ class Robot:
         self.logger.log(f"Updating {host_name}")
         host_button.click()
         time.sleep(3)
-        intervention = False
-        try:
-            if self.browser.find_elements("xpath","//h2[@class='big']")[0].text == "Upgrade Now":
-                intervention = True
-        except:
-            pass
+        #intervention = False
+        #try:
+        #    if self.browser.find_elements("xpath","//h2[@class='big']")[0].text == "Upgrade Now":
+        #        intervention = True
+        #except:
+        #    pass
 
-        if intervention:
-            raise Exception("Manual intervention required. Upgrade text detected.")
+        #if intervention:
+        #    raise Exception("Manual intervention required. Upgrade text detected.")
 
-        self.browser.save_screenshot(f"{host_name}_success.png")
-        btn_updatehost = host.find_element("xpath","//button[@class='btn btn-170 btn-flat btn-success btn-round-corners pr-sm ml-sm-30']")
-        btn_updatehost.click()
+        #self.browser.save_screenshot(f"{host_name}_success.png")
+        #btn_updatehost = host.find_element("xpath","//button[@class='btn btn-170 btn-flat btn-success btn-round-corners pr-sm ml-sm-30']")
+        #btn_updatehost.click()
         time.sleep(3)
         self.browser.save_screenshot(f"{host_name}_success_b.png")
     @staticmethod
@@ -154,7 +154,8 @@ class Robot:
 
     @staticmethod
     def get_host_button(host, iteration):
-        return host.find_element("xpath",".//following-sibling::td[4]/button[contains(@class, 'btn')]")
+        return host.find_element("xpath","//button[@class='btn btn-labeled btn-success]")
+        #return host.find_element("xpath",".//following-sibling::td[4]/button[contains(@class, 'btn')]")
 
     def get_hosts(self):
         host_tds = self.browser.find_elements("xpath","//td[@data-title=\"Host\"]")
