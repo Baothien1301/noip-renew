@@ -154,7 +154,7 @@ class Robot:
 
     @staticmethod
     def get_host_button(host, iteration):
-        return host.find_element("xpath","//button[@class='btn btn-labeled btn-success]")
+        return host.find_element("xpath","//button[@class='btn btn-labeled btn-success']")
         #return host.find_element("xpath",".//following-sibling::td[4]/button[contains(@class, 'btn')]")
 
     def get_hosts(self):
